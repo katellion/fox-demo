@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Spine Fox Demo</title>
+  <script src="https://esotericsoftware.com/files/runtime/spine-player/spine-player.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      height: 100%;
+    }
+    #player {
+      width: 100%;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="player"></div>
+
+  <script>
+    new spine.SpinePlayer("player", {
+      jsonUrl: "fox.json",
+      atlasUrl: "fox.atlas",
+      backgroundColor: "#00000000",
+      showControls: true,
+      alpha: true
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+fox.png
+size:2048,2048
+pma:true
+Cane
+bounds:1128,1139,631,821
+offsets:1,1,633,823
+Chest
+bounds:1479,141,352,356
+rotate:90
+End Of Scarf
+bounds:744,301,932,404
+Eyeball
+bounds:1541,752,116,112
+offsets:1,1,118,114
+Finger Right Hand
+bounds:2,1845,76,115
+offsets:1,1,78,117
+Glare
+bounds:80,1933,28,27
+offsets:1,1,30,29
+Handle Of Umbrella
+bounds:796,743,207,132
+offsets:1,1,209,134
+Head
+bounds:1573,276,663,473
+rotate:90
+Leaf
+bounds:1246,118,231,218
+offsets:1,1,233,220
+Left Hand
+bounds:1931,939,115,114
+offsets:1,1,118,116
+Left Leg
+bounds:1497,2,368,549
+rotate:90
+Left Sleeve
+bounds:1780,975,266,348
+Mouse In Pocket
+bounds:1615,1034,134,103
+Mouse On Tail
+bounds:1761,1324,237,324
+offsets:1,2,239,327
+Pocket
+bounds:444,105,160,195
+Pupil
+bounds:860,1879,82,81
+offsets:1,1,84,83
+Right Hand
+bounds:963,1801,119,159
+offsets:1,1,121,161
+Right Leg
+bounds:444,90,549,428
+rotate:180
+Right Sleeve
+bounds:2,265,384,440
+offsets:1,1,386,442
+rotate:90
+Scarf
+bounds:1761,1650,310,280
+offsets:1,1,312,282
+rotate:90
+Skirt
+bounds:215,574,783,588
+rotate:90
+Tail
+bounds:2,793,276,1167
+Umbrella Dome
+bounds:215,877,1083,911
+rotate:270
+Underskirt
+bounds:1016,583,614,554
+rotate:180
