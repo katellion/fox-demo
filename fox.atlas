@@ -1,72 +1,62 @@
 fox.png
 size:2048,2048
 pma:true
+scale:0.5
+Background
+bounds:141,460,1577,1672
+rotate:90
 Cane
-bounds:1128,1139,631,821
-offsets:1,1,633,823
+bounds:545,46,317,412
 Chest
-bounds:1479,141,352,356
-rotate:90
+bounds:1815,1493,176,178
 End Of Scarf
-bounds:744,301,932,404
+bounds:1352,256,466,202
 Eyeball
-bounds:1541,752,116,112
-offsets:1,1,118,114
+bounds:1957,1272,59,57
 Finger Right Hand
-bounds:2,1845,76,115
-offsets:1,1,78,117
+bounds:2,1978,39,59
 Glare
-bounds:80,1933,28,27
-offsets:1,1,30,29
+bounds:43,2022,15,15
 Handle Of Umbrella
-bounds:796,743,207,132
-offsets:1,1,209,134
+bounds:1815,1425,105,67
 Head
-bounds:1573,276,663,473
-rotate:90
+bounds:1714,137,332,237
 Leaf
-bounds:1246,118,231,218
-offsets:1,1,233,220
+bounds:2,1178,116,110
+offsets:1,0,117,110
 Left Hand
-bounds:1931,939,115,114
-offsets:1,1,118,116
+bounds:1973,1619,58,58
+offsets:0,0,59,58
 Left Leg
-bounds:1497,2,368,549
-rotate:90
+bounds:1815,1134,184,275
 Left Sleeve
-bounds:1780,975,266,348
+bounds:6,1290,133,174
 Mouse In Pocket
-bounds:1615,1034,134,103
+bounds:1973,1679,67,52
 Mouse On Tail
-bounds:1761,1324,237,324
-offsets:1,2,239,327
+bounds:1927,1331,119,162
+offsets:1,1,120,164
 Pocket
-bounds:444,105,160,195
+bounds:1815,1177,80,98
 Pupil
-bounds:860,1879,82,81
-offsets:1,1,84,83
+bounds:2,1935,42,41
+offsets:0,0,42,42
 Right Hand
-bounds:963,1801,119,159
-offsets:1,1,121,161
+bounds:1973,1733,61,81
 Right Leg
-bounds:444,90,549,428
-rotate:180
+bounds:1555,44,275,214
 Right Sleeve
-bounds:2,265,384,440
-offsets:1,1,386,442
-rotate:90
+bounds:1815,1816,193,221
 Scarf
-bounds:1761,1650,310,280
-offsets:1,1,312,282
-rotate:90
+bounds:1815,1673,156,141
 Skirt
-bounds:215,574,783,588
+bounds:864,66,392,294
 rotate:90
 Tail
-bounds:2,793,276,1167
+bounds:2,1453,138,584
 Umbrella Dome
-bounds:215,877,1083,911
-rotate:270
-Underskirt
-bounds:1016,583,614,554
+bounds:2,2,542,456
 rotate:180
+Underskirt
+bounds:1081,151,307,277
+rotate:270
