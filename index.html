@@ -26,25 +26,15 @@
   });
   document.body.appendChild(app.view);
 
-  const assetPath = "";
-
   app.loader
-    .add("fox", assetPath + "fox.json")
+    .add("fox", "fox.json")
     .load((loader, resources) => {
-      const spineBoy = new spine.Spine(resources.fox.spineData);
-
-      // Центрируем
-      spineBoy.x = app.screen.width / 2;
-      spineBoy.y = app.screen.height;
-
-      // Масштаб (если нужно)
-      spineBoy.scale.set(1);
-
-      // Запускаем анимацию
-      spineBoy.state.setAnimation(0, "idle", true);
-
-      // Добавляем на сцену
-      app.stage.addChild(spineBoy);
+      const fox = new spine.Spine(resources.fox.spineData);
+      fox.x = app.screen.width / 2;
+      fox.y = app.screen.height;
+      fox.scale.set(1);
+      fox.state.setAnimation(0, "idle", true);
+      app.stage.addChild(fox);
     });
 </script>
 </body>
