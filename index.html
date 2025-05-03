@@ -2,35 +2,92 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Spine Fox Demo</title>
-  <script src="https://cdn.jsdelivr.net/npm/@esotericsoftware/spine-player@4.2.29/dist/iife/spine-player.js"></script>
+  <title>Spine WebGL Fox</title>
+  <script src="https://esotericsoftware.com/files/runtime/spine-webgl/spine-webgl.js"></script>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #111;
+      background: #222;
       height: 100%;
+      overflow: hidden;
     }
-    #player {
+    canvas {
+      display: block;
       width: 100%;
       height: 100vh;
     }
   </style>
 </head>
 <body>
-  <div id="player"></div>
-
+  <canvas id="canvas"></canvas>
   <script>
-    new spine.SpinePlayer("player", {
-      jsonUrl: "fox.json",
-      atlasUrl: "fox.atlas",
-      backgroundColor: "#00000000",
-      showControls: true,
-      alpha: true,
-      premultipliedAlpha: false,
-      enableInput: true,
-      physics: true
-    });
+    (function () {
+      const canvas = document.getElementById("canvas");
+      const gl = canvas.getContext("webgl", { alpha: true });
+
+      if (!gl) {
+        alert("WebGL not supported.");
+        return;
+      }
+
+      const assetManager = new spine.webgl.AssetManager(gl);
+      assetManager.loadText("fox.atlas");
+      assetManager.loadJson("fox.json");
+      assetManager.loadTexture("fox.png");
+
+      function load() {
+        if (assetManager.isLoadingComplete()) {
+          const atlas = new spine.TextureAtlas(assetManager.get("fox.atlas"), path => assetManager.get("fox.png"));
+          const atlasLoader = new spine.AtlasAttachmentLoader(atlas);
+          const skeletonJson = new spine.SkeletonJson(atlasLoader);
+          skeletonJson.scale = 1;
+
+          const skeletonData = skeletonJson.readSkeletonData(assetManager.get("fox.json"));
+          const skeleton = new spine.Skeleton(skeletonData);
+          skeleton.setToSetupPose();
+          skeleton.updateWorldTransform();
+
+          const bounds = skeleton.getBoundsRect();
+          const animationStateData = new spine.AnimationStateData(skeleton.data);
+          const state = new spine.AnimationState(animationStateData);
+          state.setAnimation(0, "idle", true);
+
+          const shader = spine.webgl.Shader.newTwoColoredTextured(gl);
+          const batcher = new spine.webgl.PolygonBatcher(gl);
+          const skeletonRenderer = new spine.webgl.SkeletonRenderer(gl);
+          skeletonRenderer.premultipliedAlpha = false;
+
+          spine.webgl.ResizeMode.Stretch.apply(gl.canvas, bounds);
+
+          function render() {
+            gl.clearColor(0.13, 0.13, 0.13, 1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            state.update(1 / 60);
+            state.apply(skeleton);
+            skeleton.updateWorldTransform();
+
+            shader.bind();
+            shader.setUniformi(spine.webgl.Shader.SAMPLER, 0);
+
+            batcher.begin(shader);
+            skeletonRenderer.premultipliedAlpha = false;
+            skeletonRenderer.draw(batcher, skeleton);
+            batcher.end();
+            shader.unbind();
+
+            requestAnimationFrame(render);
+          }
+
+          render();
+        } else {
+          requestAnimationFrame(load);
+        }
+      }
+
+      load();
+    })();
   </script>
 </body>
 </html>
