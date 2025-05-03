@@ -2,92 +2,50 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Spine WebGL Fox</title>
-  <script src="spine-webgl.js"></script>
+  <title>Spine PixiJS Fox</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/7.2.4/pixi.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@esotericsoftware/spine-pixi@4.2.29/dist/iife/spine-pixi.js"></script>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      background: #222;
+      background: #111;
       height: 100%;
       overflow: hidden;
     }
     canvas {
       display: block;
-      width: 100%;
-      height: 100vh;
     }
   </style>
 </head>
 <body>
-  <canvas id="canvas"></canvas>
-  <script>
-    (function () {
-      const canvas = document.getElementById("canvas");
-      const gl = canvas.getContext("webgl", { alpha: true });
+<script>
+  const app = new PIXI.Application({
+    backgroundColor: 0x111111,
+    resizeTo: window
+  });
+  document.body.appendChild(app.view);
 
-      if (!gl) {
-        alert("WebGL not supported.");
-        return;
-      }
+  const assetPath = "";
 
-      const assetManager = new spine.webgl.AssetManager(gl);
-      assetManager.loadText("fox.atlas");
-      assetManager.loadJson("fox.json");
-      assetManager.loadTexture("fox.png");
+  app.loader
+    .add("fox", assetPath + "fox.json")
+    .load((loader, resources) => {
+      const spineBoy = new spine.Spine(resources.fox.spineData);
 
-      function load() {
-        if (assetManager.isLoadingComplete()) {
-          const atlas = new spine.TextureAtlas(assetManager.get("fox.atlas"), path => assetManager.get("fox.png"));
-          const atlasLoader = new spine.AtlasAttachmentLoader(atlas);
-          const skeletonJson = new spine.SkeletonJson(atlasLoader);
-          skeletonJson.scale = 1;
+      // Центрируем
+      spineBoy.x = app.screen.width / 2;
+      spineBoy.y = app.screen.height;
 
-          const skeletonData = skeletonJson.readSkeletonData(assetManager.get("fox.json"));
-          const skeleton = new spine.Skeleton(skeletonData);
-          skeleton.setToSetupPose();
-          skeleton.updateWorldTransform();
+      // Масштаб (если нужно)
+      spineBoy.scale.set(1);
 
-          const bounds = skeleton.getBoundsRect();
-          const animationStateData = new spine.AnimationStateData(skeleton.data);
-          const state = new spine.AnimationState(animationStateData);
-          state.setAnimation(0, "idle", true);
+      // Запускаем анимацию
+      spineBoy.state.setAnimation(0, "idle", true);
 
-          const shader = spine.webgl.Shader.newTwoColoredTextured(gl);
-          const batcher = new spine.webgl.PolygonBatcher(gl);
-          const skeletonRenderer = new spine.webgl.SkeletonRenderer(gl);
-          skeletonRenderer.premultipliedAlpha = false;
-
-          spine.webgl.ResizeMode.Stretch.apply(gl.canvas, bounds);
-
-          function render() {
-            gl.clearColor(0.13, 0.13, 0.13, 1);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-
-            state.update(1 / 60);
-            state.apply(skeleton);
-            skeleton.updateWorldTransform();
-
-            shader.bind();
-            shader.setUniformi(spine.webgl.Shader.SAMPLER, 0);
-
-            batcher.begin(shader);
-            skeletonRenderer.premultipliedAlpha = false;
-            skeletonRenderer.draw(batcher, skeleton);
-            batcher.end();
-            shader.unbind();
-
-            requestAnimationFrame(render);
-          }
-
-          render();
-        } else {
-          requestAnimationFrame(load);
-        }
-      }
-
-      load();
-    })();
-  </script>
+      // Добавляем на сцену
+      app.stage.addChild(spineBoy);
+    });
+</script>
 </body>
 </html>
